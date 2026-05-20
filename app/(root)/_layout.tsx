@@ -1,9 +1,13 @@
+import { useUserSync } from "@/hooks/useUserSync";
 import { useAuth } from "@clerk/expo";
 import { Redirect, Slot } from "expo-router";
 import React from "react";
 
 const RootLayout = () => {
     const { isSignedIn, isLoaded } = useAuth();
+
+    // sync Clerk user -> supabase
+    useUserSync();
 
     if (!isLoaded) {
         return null;
